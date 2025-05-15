@@ -18,6 +18,8 @@ public class CarController {
         return repository.findAll();
     }
 
+    // 이를 어떻게 해야 하나?????
+
     @GetMapping("/cars")
     public Iterable<Car> getCars() {
         return repository.findAll();
