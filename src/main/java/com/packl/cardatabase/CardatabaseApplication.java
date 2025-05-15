@@ -1,14 +1,12 @@
 package com.packl.cardatabase;
 
-import com.packl.cardatabase.domain.Car;
-import com.packl.cardatabase.domain.CarRepository;
-import com.packl.cardatabase.domain.Owner;
-import com.packl.cardatabase.domain.OwnerRepository;
+import com.packl.cardatabase.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -19,11 +17,13 @@ public class CardatabaseApplication implements CommandLineRunner {
 
 	private final CarRepository repository;
 	private final OwnerRepository orepository;
+	private final AppUserRepository urepository;
 
 
-	public CardatabaseApplication(CarRepository repository, OwnerRepository orepository) {
+	public CardatabaseApplication(CarRepository repository, OwnerRepository orepository, AppUserRepository urepository) {
 		this.repository = repository;
 		this.orepository = orepository;
+		this.urepository = urepository;
 	}
 
 	public static void main(String[] args) {
@@ -42,5 +42,8 @@ public class CardatabaseApplication implements CommandLineRunner {
 		owner2.addCar(car2);
 		owner2.addCar(car3);
 		orepository.saveAll(Arrays.asList(owner1, owner2));
+
+		urepository.save(new AppUser("user1", new BCryptPasswordEncoder().encode("password"), "USER"));
+		urepository.save(new AppUser("admin", new BCryptPasswordEncoder().encode("password"), "ADMIN"));
 	}
 }
