@@ -6,12 +6,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
 @SpringBootApplication
+@EnableMethodSecurity
 public class CardatabaseApplication implements CommandLineRunner {
 	private static final Logger logger = LoggerFactory.getLogger(CardatabaseApplication.class);
 
